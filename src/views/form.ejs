@@ -1,21 +1,63 @@
 <%- include('header') -%>
 
-<form method="post" action="/form">
 
-  <label for="name">Heiti flokks:</label>
-  <input type="text" id="name" name="name">
-  <input type="number" id="name" name="number">
-  <label>rétt svar #1: <input type="radio" id="name" name="rett_svar" value="1"></label>
-  <label>rétt svar #2: <input type="radio" id="name" name="rett_svar" value="1"></label>
-  <label>rétt svar #3: <input type="radio" id="name" name="rett_svar" value="1"></label>
 
-  <input type="checkbox" id="name" name="checkbox">
-  <select>
-    <option>foo</option>
-    <option value="foobar">bar</option>
-  </select>
-  <textarea name="text"></textarea>
-  <button type="submit">Búa til flokk</button>
+<div>
+  <form method="post" action="/form">
+    <div>
+      <label for="">Nýr flokkur</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<div>
+  <form method="post" action="/form">
+  <div>
+    <label for="">Spurning</label>
+    <textarea id="" name="" required minlength="5" maxlength="500"></textarea>
+  </div>
+  <div>
+    <label for="_1">Flokkur</label>
+    <select id="_1" name="_1" required>
+      <option value="option1">Option 1</option>
+      <!--fá öll flokkanöfn úr categories-->
+    </select>
+  </div>
+  <div>
+    <label for="_2">Svarmöguleiki 1</label>
+    <textarea id="_2" name="_2" required></textarea>
+  </div>
+  <div>
+    <label for="_3">Svarmöguleiki 2</label>
+    <textarea id="_3" name="_3" required></textarea>
+  </div>
+  <div>
+    <label for="_4">Svarmöguleiki 3</label>
+    <textarea id="_4" name="_4" required></textarea>
+  </div>
+  <div>
+    <label for="_5">Svarmöguleiki 4</label>
+    <textarea id="_5" name="_5" required></textarea>
+  </div>
+  <div>
+    <label for="_6">Rétt svar</label>
+    <input type="checkbox" id="_6_0" name="_6" value="option1">
+    <label for="_6_0">Option 1</label>
+    <input type="checkbox" id="_6_1" name="_6" value="option2">
+    <label for="_6_1">Option 2</label>
+    <input type="checkbox" id="_6_2" name="_6" value="option3">
+    <label for="_6_2">Option 3</label>
+    <input type="checkbox" id="_6_3" name="_6" value="option4">
+    <label for="_6_3">Option 4</label>
+  </div>
+  <button type="submit">Submit</button>
 </form>
+</div>
+
+
+
+
 
 <%- include('footer') -%>

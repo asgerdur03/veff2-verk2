@@ -2,22 +2,44 @@ import express from 'express';
 import { getDatabase } from './lib/db.client.js';
 import { environment } from './lib/environment.js';
 import { logger } from './lib/logger.js';
+import { categoriesFromDatabase, questionsFromDatabase } from './lib/db.js';
 
 export const router = express.Router();
 
 router.get('/', async (req, res) => {
+  // Frekar reddý?
   const result = await getDatabase()?.query('SELECT * FROM categories');
 
+  //const result = await categoriesFromDatabase();
   const categories = result?.rows ?? [];
 
-  console.log(categories);
+ // console.log(categories);
   res.render('index', { title: 'Forsíða', categories });
 });
 
-router.get('/spurningar/:category', (req, res) => {
+router.get('/spurningar/:category',async (req, res) => {
   // TEMP EKKI READY FYRIR PRODUCTION
-  const title = req.params.category;
-  res.render('category', { title });
+  const title = req.params.category; // titill er sá sami og 
+
+  // finna category id til að sækja spurningar
+  const get_id = await getDatabase()?.query('SELECT id FROM categories WHERE lower(name) = lower($1)', [title]);
+  const category_id = get_id?.rows[0].id
+
+  console.log(category_id);
+  
+  // sækja spurningar
+  const result = await getDatabase()?.query('SELECT * FROM questions WHERE category_id = $1', [category_id]);
+
+  const questions = result?.rows ?? [];
+
+  // console.log(questions);
+
+
+  //  for each question_id, get answers
+
+
+  res.render('category', { title, questions, answers}); // sækja spurningar fyrir þile, gögnin
+
 });
 
 router.get('/form', (req, res) => {
@@ -43,9 +65,8 @@ router.post('/form', async (req, res) => {
 
   const db = getDatabase();
 
-  const result = await db?.query('INSERT INTO categories (name) VALUES ($1)', [
-    name,
-  ]);
+  const result = await db?.query('INSERT INTO categories (name) VALUES ($1)', [name,]);
+
 
   console.log(result);
 

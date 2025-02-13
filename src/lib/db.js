@@ -26,6 +26,27 @@ export async function categoriesFromDatabase() {
   return null;
 }
 
+export async function questionsFromDatabase(categoryId) {
+  const result = await query('SELECT * FROM questions WHERE category_id = $1',[categoryId]); 
+  console.log('result :>> ', result);
+  if (result?.rowCount > 0) {
+    return result.rows;
+  }
+
+  return null;
+}
+
+export async function answersFromDatabase(questionId) {
+  const result = await query('SELECT * FROM answers WHERE question_id = $1', [questionId]);
+  console.log('result :>> ', result);
+  if (result?.rowCount > 0) {
+    return result.rows;
+  }
+  return null;
+}
+
+
+
 export async function query(q) {
   let client;
 

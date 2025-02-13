@@ -1,5 +1,23 @@
 <%- include('header') -%>
 
-spurnigaflokkur!
+<h2>Spurningar fyrir <%=title %></h2>
+
+<% if (questions && questions.length > 0) { %>
+    <div class="questions">
+        <% questions.forEach(question => { %>
+            <div class="question">
+                <p><%= question.question %></p>
+
+                <div class="answers">
+                <!-- hér kemur svo ítrun á svörum-->
+                </div>
+
+            </div>
+        <% }); %>
+        </div>
+<% } else { %>
+    <p>No questions found for this category.</p>
+<% } %>
+
 
 <%- include('footer') -%>

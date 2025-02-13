@@ -7,6 +7,8 @@ const SCHEMA_FILE = './sql/schema.sql';
 const DROP_SCHEMA_FILE = './sql/drop.sql';
 const INSERT_FILE = './sql/insert.sql';
 
+// Keyrt með npm run setup, keyrir database skrár (Basically reset )
+
 /**
  * @param {Database} db
  * @param {import('./lib/logger.js').Logger} logger

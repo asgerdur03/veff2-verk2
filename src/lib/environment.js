@@ -23,7 +23,7 @@ export function environment(env, logger) {
     return parsedEnv;
   }
 
-  const { PORT: port, DATABASE_URL: envConnectionString } = env;
+  const { PORT: port, DATABASE_URL: envConnectionString } = env; // sækir port og database url
 
   let error = false;
 
