@@ -14,10 +14,10 @@
 
 <div class="ny-spurning">
   <form method="post" action="/form">
-    <p>Ný spurning, merkið við box til að merkja rétt svar, eins mörg og þú vilt</p>
+    <p>Ný spurning, merkið við box til að merkja rétt svar, eins mörg og þú vilt. Spurning verður að vera á milli 5 og 1000 stafir</p>
   <div>
     <label for="">Spurning</label>
-    <input type="text" id="spurning" name="spurning" required>
+    <input type="text" id="spurning" name="spurning" required minlength="5" maxlength="1000">
   </div>
   <div class="flokkur">
     <label for="_1">Flokkur</label>
@@ -29,6 +29,7 @@
   </select>
 
   </div>
+  <p>Spurning verður að hafa 4 svarmöguleika, og amk eitt rétt svar</p>
   <div>
     <label for="">Svarmöguleiki 1</label>
     <input type="text" name="svar1" required>

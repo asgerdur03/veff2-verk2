@@ -85,7 +85,7 @@ router.post('/form', async (req, res) => {
     { text: svar4, correct: correct.includes(4) },
     ];
 
-console.log(answers);
+//console.log(answers);
 
   // Ef allt OK, búa til í gagnagrunn.
   const env = environment(process.env, logger);
