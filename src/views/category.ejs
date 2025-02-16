@@ -9,8 +9,15 @@
                 <p><%= question.question %></p>
 
                 <div class="answers">
-                <!-- hér kemur svo ítrun á svörum-->
+                    <% question.answers.forEach(answer => { %>
+                        <div class="<%= answer.correct ? 'correct' : 'incorrect' %>">
+                            <input type="checkbox" name="" id="">
+                            <label><%= answer.answer %></label>
+                            
+                        </div>
+                    <% }); %>
                 </div>
+                <button onclick="showAnswers(this)" >Show answers</button>
 
             </div>
         <% }); %>
@@ -18,6 +25,32 @@
 <% } else { %>
     <p>No questions found for this category.</p>
 <% } %>
+
+<script>
+    function showAnswers(buttonElement) {
+        const answersDiv = buttonElement.closest(".question").querySelector(".answers");
+        const answers = answersDiv.querySelectorAll("div");
+
+// Toggle class for styling
+        answers.forEach(answer => {
+            if (answer.classList.contains("correct")) {
+                answer.classList.toggle("revealed");  
+            } else if (answer.classList.contains("incorrect")) {
+                answer.classList.toggle("revealed");  
+            }
+        });
+    }
+
+        
+</script>
+
+<style>
+    .correct { color: inherit; }
+    .incorrect { color: inherit; }
+
+    .correct.revealed { background-color: rgb(59, 228, 59); font-weight: bold; }
+    .incorrect.revealed { background-color: rgb(236, 30, 30); }
+</style>
 
 
 <%- include('footer') -%>

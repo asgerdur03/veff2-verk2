@@ -2,7 +2,7 @@
 
 
 
-<div>
+<div class ="nyr-flokkur">
   <form method="post" action="/form">
     <div>
       <label for="">Nýr flokkur</label>
@@ -12,51 +12,46 @@
   </form>
 </div>
 
-<div>
+<div class="ny-spurning">
   <form method="post" action="/form">
+    <p>Ný spurning, merkið við box til að merkja rétt svar, eins mörg og þú vilt</p>
   <div>
     <label for="">Spurning</label>
-    <textarea id="" name="" required minlength="5" maxlength="500"></textarea>
+    <input type="text" id="spurning" name="spurning" required>
   </div>
-  <div>
+  <div class="flokkur">
     <label for="_1">Flokkur</label>
-    <select id="_1" name="_1" required>
-      <option value="option1">Option 1</option>
-      <!--fá öll flokkanöfn úr categories-->
-    </select>
+    <select id="flokkur" name="flokkur" required>
+
+    <% flokkar.forEach(category => { %>
+      <option value="<%=category.id %>"><%=category.name %></option>
+    <% }); %>
+  </select>
+
   </div>
   <div>
-    <label for="_2">Svarmöguleiki 1</label>
-    <textarea id="_2" name="_2" required></textarea>
+    <label for="">Svarmöguleiki 1</label>
+    <input type="text" name="svar1" required>
+    <input type="checkbox" name="correct" value="1">
   </div>
   <div>
     <label for="_3">Svarmöguleiki 2</label>
-    <textarea id="_3" name="_3" required></textarea>
+    <input type="text" name="svar2" required>
+    <input type="checkbox" name="correct" value="2">
   </div>
   <div>
     <label for="_4">Svarmöguleiki 3</label>
-    <textarea id="_4" name="_4" required></textarea>
+    <input type="text" name="svar3" required>
+    <input type="checkbox" name="correct" value="3">
   </div>
   <div>
     <label for="_5">Svarmöguleiki 4</label>
-    <textarea id="_5" name="_5" required></textarea>
-  </div>
-  <div>
-    <label for="_6">Rétt svar</label>
-    <input type="checkbox" id="_6_0" name="_6" value="option1">
-    <label for="_6_0">Option 1</label>
-    <input type="checkbox" id="_6_1" name="_6" value="option2">
-    <label for="_6_1">Option 2</label>
-    <input type="checkbox" id="_6_2" name="_6" value="option3">
-    <label for="_6_2">Option 3</label>
-    <input type="checkbox" id="_6_3" name="_6" value="option4">
-    <label for="_6_3">Option 4</label>
+    <input type="text" name="svar4" required>
+    <input type="checkbox" name="correct" value="4">
   </div>
   <button type="submit">Submit</button>
 </form>
 </div>
-
-
 
 
 

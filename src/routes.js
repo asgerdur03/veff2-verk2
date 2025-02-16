@@ -2,7 +2,7 @@ import express from 'express';
 import { getDatabase } from './lib/db.client.js';
 import { environment } from './lib/environment.js';
 import { logger } from './lib/logger.js';
-import { categoriesFromDatabase, questionsFromDatabase } from './lib/db.js';
+import xss from 'xss';
 
 export const router = express.Router();
 
@@ -32,30 +32,60 @@ router.get('/spurningar/:category',async (req, res) => {
 
   const questions = result?.rows ?? [];
 
-  // console.log(questions);
 
 
   //  for each question_id, get answers
 
+  for (const question of questions) {
+    const answers = await getDatabase()?.query('SELECT * FROM answers WHERE question_id = $1', [question.id]);
+    question.answers = answers?.rows ?? [];
+  }
 
-  res.render('category', { title, questions, answers}); // sækja spurningar fyrir þile, gögnin
+  console.log(questions);
+
+
+  res.render('category', { title, questions}); // sækja spurningar fyrir þile, gögnin
 
 });
 
-router.get('/form', (req, res) => {
-  res.render('form', { title: 'Búa til flokk' });
+router.get('/form', async (req, res) => {
+  const data = await getDatabase()?.query('SELECT * FROM categories');
+
+  const flokkar = data?.rows ?? [];
+
+  console.log(flokkar);
+
+
+  res.render('form', { title: 'Búa til flokk eða spurningu', flokkar });
 });
 
 router.post('/form', async (req, res) => {
   const { name } = req.body;
 
+  const {spurning, flokkur, svar1, svar2, svar3, svar4} = xss(req.body); 
+  let correct = xss(req.body.correct); 
+
+  console.log(spurning, flokkur, svar1, svar2, svar3, svar4, correct);
+
   console.log(name);
 
-  // Hér þarf að setja upp validation, hvað ef name er tómt? hvað ef það er allt handritið að BEE MOVIE?
-  // Hvað ef það er SQL INJECTION? HVAÐ EF ÞAÐ ER EITTHVAÐ ANNAÐ HRÆÐILEGT?!?!?!?!?!
-  // TODO VALIDATION OG HUGA AÐ ÖRYGGI
+  // TODO: bæta við validation áður en sett er í gagnagrunn
 
   // Ef validation klikkar, senda skilaboð um það á notanda
+
+
+// rétt svör
+  correct = Array.isArray(correct) ? correct.map(Number) : [Number(correct)];
+
+
+  const answers = [
+    { text: svar1, correct: correct.includes(1) },
+    { text: svar2, correct: correct.includes(2) },
+    { text: svar3, correct: correct.includes(3) },
+    { text: svar4, correct: correct.includes(4) },
+    ];
+
+console.log(answers);
 
   // Ef allt OK, búa til í gagnagrunn.
   const env = environment(process.env, logger);
@@ -65,10 +95,23 @@ router.post('/form', async (req, res) => {
 
   const db = getDatabase();
 
-  const result = await db?.query('INSERT INTO categories (name) VALUES ($1)', [name,]);
+  if (name) {
+      await db?.query('INSERT INTO categories (name) VALUES ($1)', [name,]);
+  }
 
+  let ny_spurning_skila_id;
+  if (flokkur && spurning) {
+    ny_spurning_skila_id = await db?.query('INSERT INTO questions (category_id, question) VALUES ($1, $2) RETURNING id', [flokkur, spurning]);
+  }
 
-  console.log(result);
+  const ans_id = ny_spurning_skila_id?.rows[0].id;
+
+  if (ans_id && answers) {
+    for (let i = 0; i < answers.length; i++) {
+    await db?.query('INSERT INTO answers (question_id, answer, correct) VALUES ($1, $2, $3)', [ans_id, answers[i].text, answers[i].correct]);
+    }
+  }
+  
 
   res.render('form-created', { title: 'Flokkur búinn til' });
 });

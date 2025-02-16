@@ -15,6 +15,58 @@ insert into questions (category_id, question) values
 ;
 
 
+insert into answers (question_id, answer, correct) values
+(1, '<a href=\"about.html\">About</a>"', true),
+(1, '<form method=\"get\" action=\"about.html\"><button>About</button></form>', false),
+(1, '<button to=\"about.html\">About</button>', false),
+(1, 'Allar jafn góðar / All equally good', false),
+(2, 'Þannig að stafir birtist rétt.', true),
+(2, 'Skilgreining sem visual studio verður að hafa þannig að prettier virki rétt.', false),
+(2, 'Skilgreining sem aXe krefur okkur um til að vefur verði aðgengilegur.', false),
+(2, 'Ekkert af þessu.', false),
+(3, 'Allt af þessu.', true),
+(3, 'Nota eingöngu lyklaborð við að skoða og nota vefinn.', false),
+(3, 'Merkja form á aðgengilegan hátt.', false),
+(3, 'Hafa tóman alt texta á myndum ef þær eru eingöngu til skrauts.', false),
+(4, 'Hvert HTML element hefur einhverja skilgreinda merkingu—merkingarfræðilegt gildi—sem við þurfum að hafa í huga þegar við smíðum vefi.', true),
+(4, 'Hvert HTML tag hefur einhverja skilgreinda merkingu—merkingarfræðilegt gildi—sem við þurfum að hafa í huga þegar við smíðum vefi.', false),
+(4, 'Hvert CSS eigindi hefur einhverja skilgreinda merkingu—merkingarfræðilegt gildi—sem við þurfum að hafa í huga þegar við smíðum vefi.', false),
+(4, 'Hver CSS selector hefur einhverja skilgreinda merkingu—merkingarfræðilegt gildi—sem við þurfum að hafa í huga þegar við smíðum vefi.', false),
+(5, 'font-size: 20px;, color: green;', true),
+(5, 'font-size: 10px;, color: green;', false),
+(5, 'font-size: 10px;, color: red;', false),
+(5, 'font-size: 10px;, color: blue;', false),
+(6, 'Skilgreina fallback gildi á undan nýja gildinu sem væri notað í stað þess ef það er ekki stutt', true),
+(6, 'Skilgreina fallback gildi á eftir nýja gildinu sem væri notað í stað þess ef það er ekki stutt.', false),
+(6, 'Setja upp JavaScript virkni sem bendir notanda á að sækja nýjann vafra sem styður gildið.', false),
+(6, 'Þetta er ekki stutt í CSS.', false),
+(7, '„Flex container“ og „flex items; „grid container“ og „grid items“: greinarmunur á foreldri og börnum þegar flexbox og CSS grid er notað.', true),
+(7, '„Flex container“ og „flex items: greinarmunur á foreldri og börnum eingngu þegar flexbox er notað.', false),
+(7, '„Grid container“ og „grid items“: greinarmunur á foreldri og börnum eingöngu þegar grid er notað.', false),
+(7, 'Hugtök sem eru notuð með `querySelectorAll`: „container“ er það element sem leitað er undir, „items“ það sem er skilað.', false),
+(8, 'Höfum skilgreinda tvo ása: aðalás og krossás sem eru hornréttir; sjálfgefin röðun er á aðalás frá vinstri til hægri.', true),
+(8, 'Höfum skilgreinda tvo ása: aðalás og krossás sem eru samsíða; sjálfgefin röðun er á aðalás frá vinstri til hægri.', false),
+(8, 'Höfum skilgreinda tvo ása: aðalás og krossás sem eru hornréttir; sjálfgefin röðun er á krossás frá vinstri til hægri.', false),
+(8, 'Höfum skilgreinda tvo ása: aðalás og krossás sem eru samsíða; sjálfgefin röðun er á krossás frá vinstri til hægri.', false),
+(9, '8', true),
+(9, '[8]', false),
+(9, 'Uncaught ReferenceError: item is not defined', false),
+(9, 'undefined', false),
+(10, 'Þessi samanburður byrjar á að bera saman týpur gilda og kemst því framhjá type coercion sem gerist með samanburð með tveimur samasem merkjum.', true),
+(10, 'Við ættum alltaf að nota tvö samasem merki, ekki þrjú því þá byrjum við á að bera saman týpur gilda og komumst þannig framhjá type coercion.', false),
+(10, 'Þessi samanburður kemst framhjá truthy og falsy gildum og skilar eingöngu réttum niðurstöðum fyrir primitive gildi.', false),
+(10, 'Þessi samanburður nyttir lógíska virkja sem virka aðeins í tvístæðum.', false),
+(11, 'Búið til `fetch` request kall sem tilgreinir að minnsta kosti URL; villuathugun á kalli og svari með tilliti til HTTP; gögn sótt í response með villuathugun.', true),
+(11, 'Búið til `fetch` request kall sem verður að tilgreina URL, HTTP aðferð og stöðukóða; villuathugun á kalli og svari með tilliti til HTTP; GObject Object með villuathugun.', false),
+(11, 'Búið til `fetch` request kall sem tilgreinir að minnsta kosti URL; villuathugun á kalli og svari með tilliti til URL; GObject Object með villuathugun.', false),
+(11, 'Búið til `fetch` request kall sem tilgreinir að minnsta kosti URL; villuathugun á kalli og svari með tilliti til HTTP; eingöngu JSON goggles með villuathugun.', false);
+
+
+
+
+
+
+
 
 
 
