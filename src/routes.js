@@ -7,7 +7,7 @@ import xss from 'xss';
 export const router = express.Router();
 
 
-router.get('/', async (res) => {
+router.get('/', async (req,res) => {
   try {
   const result = await getDatabase()?.query('SELECT * FROM categories');
 
@@ -15,7 +15,8 @@ router.get('/', async (res) => {
   res.render('index', { title: 'Forsíða', categories });
 
 } catch (error) {
-  res.status(500).render('error', { title: 'Villa', error: error});
+  console.error(error)
+  res.status(500).render('error', { title: 'Villa'});
 }
 });
 
@@ -39,11 +40,13 @@ router.get('/spurningar/:category',async (req, res) => {
   res.render('category', { title, questions}); // sækja spurningar fyrir þile, gögnin
 
 } catch (error) {
-  res.status(500).render('error', { title: 'Villa', error: error});}
+  console.error(error)
+  res.status(500).render('error', { title: 'Villa'});
+}
 
 });
 
-router.get('/form', async (res) => {
+router.get('/form', async (req, res) => {
   try {
   const data = await getDatabase()?.query('SELECT * FROM categories');
 
@@ -55,8 +58,8 @@ router.get('/form', async (res) => {
   res.render('form', { title: 'Búa til flokk eða spurningu', flokkar });
 
 } catch (error) {
-  res.status(500).render('error', { title: 'Villa', error: error});
-}
+  console.error(error)
+  res.status(500).render('error', { title: 'Villa'});}
 });
 
 router.post('/question', async (req, res) => {
@@ -125,8 +128,8 @@ router.post('/question', async (req, res) => {
     res.render('form-created', { title: 'Spurning búinn til' });
 
   } catch (error) {
-    res.status(500).render('error', { title: 'Villa', error: error});
-  }
+    console.error(error)
+    res.status(500).render('error', { title: 'Villa'});  }
 });
 
 router.post('/category', async (req, res) => {
@@ -149,8 +152,8 @@ router.post('/category', async (req, res) => {
 
 
   } catch (error) {
-    res.status(500).render('error', { title: 'Villa', error: error});
-  }
+    console.error(error)
+    res.status(500).render('error', { title: 'Villa'});  }
 });
 
 
@@ -161,12 +164,13 @@ router.get("/cause-error", () => {
 });
 
 // 404
-router.use((res) => {
+router.use((req, res) => {
   res.status(404).send("Síða fannst ekki (404)");
 });
 
 // 500
-router.use((err,res) => {
-  const error = err.message || err;
-  res.status(500).render("error", { title: "Villa", error: error });
+// eslint-disable-next-line no-unused-vars
+router.use((err,req, res, next ) => {
+  res.status(500).render("error", { title: "Villa"});
 });
+
