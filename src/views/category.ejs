@@ -6,7 +6,7 @@
     <div class="questions">
         <% questions.forEach(question => { %>
             <div class="question">
-                <p><%= question.question %></p>
+                <p><strong>Spurning: </strong><%= question.question %></p>
 
                 <div class="answers">
                     <% question.answers.forEach(answer => { %>
@@ -43,14 +43,5 @@
 
         
 </script>
-
-<style>
-    .correct { color: inherit; }
-    .incorrect { color: inherit; }
-
-    .correct.revealed { background-color: rgb(59, 228, 59); font-weight: bold; }
-    .incorrect.revealed { background-color: rgb(236, 30, 30); }
-</style>
-
 
 <%- include('footer') -%>

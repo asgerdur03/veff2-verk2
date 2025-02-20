@@ -1,0 +1,107 @@
+:root {
+    --font-base-size: 16px;
+    --font-base-family: system-ui, helvetica, arial, sans-serif;
+    --max-inline-size: 50rem;
+    --spacing: 1rem;
+    --color-correct: #bffbbf;
+    --color-incorrect: #fdbcb5;
+
+
+    
+}
+
+html {
+    box-sizing: border-box;
+
+    padding: 2rem;
+
+    width: 100vw;
+    height: 100%;
+    background-image: url('image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+*,
+*::before,
+ *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+
+/*svaradæmi*/
+.correct { color: inherit; }
+.incorrect { color: inherit; }
+
+.correct.revealed { background-color: var(--color-correct); font-weight: bold; }
+.incorrect.revealed { background-color: var(--color-incorrect); }
+
+
+body{
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+
+li{
+    margin: 1rem;
+}
+
+
+.questions,
+.question{
+    margin: 1rem;
+}
+
+
+button{
+    padding: 4px;
+    margin-top: 4px;
+    width: 100px;
+}
+
+p{
+    margin-bottom: 0.5rem;
+}
+
+
+.answers{
+    display: flex;
+    flex-direction: column;
+    border: solid black 1px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.answers div {
+    padding: 1rem;
+    
+}
+
+.nyr-flokkur,
+.ny-spurning{
+    border: black solid 1px;
+    border-radius: 10px;
+    display: flex;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+
+.ny-spurning div{
+    margin-bottom: 1rem;
+}
+
+
+select,
+input[type=text]
+{
+    width: 180px;
+}

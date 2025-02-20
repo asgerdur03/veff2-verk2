@@ -21,7 +21,14 @@ app.set('views', viewsPath);
 const viewsPath = new URL('./views', import.meta.url).pathname;
 app.set('views', viewsPath);
 */
+
+
 app.set('view engine', 'ejs');
+
+
+// Serve static files (CSS, JS, images)
+const publicPath = path.join(__dirname, '../public'); // Ensure correct path
+app.use(express.static(publicPath));
 
 app.use('/', router);
 

@@ -14,13 +14,13 @@
 
 <div class="ny-spurning">
   <form method="post" action="/question">
-    <p>Ný spurning, merkið við box til að merkja rétt svar, eins mörg og þú vilt. Spurning verður að vera á milli 5 og 1000 stafir</p>
+    <p>Ný spurning, merkið við box til að merkja rétt svar, aðeins EITT rétt. Spurning verður að vera á milli 5 og 1000 stafir</p>
   <div>
     <label for="">Spurning</label>
     <input type="text" id="spurning" name="spurning" required minlength="5" maxlength="1000">
   </div>
   <div class="flokkur">
-    <label for="_1">Flokkur</label>
+    <label for="_1">Flokkur  </label>
     <select id="flokkur" name="flokkur" required>
 
     <% flokkar.forEach(category => { %>
