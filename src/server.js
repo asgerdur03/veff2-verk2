@@ -32,7 +32,8 @@ app.use(express.static(publicPath));
 
 app.use('/', router);
 
-const hostname = '0.0.0.0';
+const hostname = process.env.RENDER ? '0.0.0.0' : '127.0.0.1'; // Use 127.0.0.1 locally
+
 const port = 3000;
 
 app.listen(port, hostname, () => {

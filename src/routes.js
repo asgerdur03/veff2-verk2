@@ -1,5 +1,5 @@
 import express from 'express';
-import { Database, getDatabase } from './lib/db.client.js';
+import { getDatabase } from './lib/db.client.js';
 import { environment } from './lib/environment.js';
 import { logger } from './lib/logger.js';
 import xss from 'xss';
@@ -7,7 +7,7 @@ import xss from 'xss';
 export const router = express.Router();
 
 
-router.get('/', async (req, res) => {
+router.get('/', async (res) => {
   try {
   const result = await getDatabase()?.query('SELECT * FROM categories');
 
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   res.render('index', { title: 'Forsíða', categories });
 
 } catch (error) {
-  res.status(500).render('error', { title: 'Villa' });
+  res.status(500).render('error', { title: 'Villa', error: error});
 }
 });
 
@@ -39,11 +39,11 @@ router.get('/spurningar/:category',async (req, res) => {
   res.render('category', { title, questions}); // sækja spurningar fyrir þile, gögnin
 
 } catch (error) {
-  res.status(500).render('error', { title: 'Villa' });}
+  res.status(500).render('error', { title: 'Villa', error: error});}
 
 });
 
-router.get('/form', async (req, res) => {
+router.get('/form', async (res) => {
   try {
   const data = await getDatabase()?.query('SELECT * FROM categories');
 
@@ -55,7 +55,7 @@ router.get('/form', async (req, res) => {
   res.render('form', { title: 'Búa til flokk eða spurningu', flokkar });
 
 } catch (error) {
-  res.status(404).send('Síða er ekki til');
+  res.status(500).render('error', { title: 'Villa', error: error});
 }
 });
 
@@ -125,7 +125,7 @@ router.post('/question', async (req, res) => {
     res.render('form-created', { title: 'Spurning búinn til' });
 
   } catch (error) {
-    res.status(500).render('error', { title: 'Villa' });
+    res.status(500).render('error', { title: 'Villa', error: error});
   }
 });
 
@@ -149,24 +149,24 @@ router.post('/category', async (req, res) => {
 
 
   } catch (error) {
-    res.status(500).render('error', { title: 'Villa' });
+    res.status(500).render('error', { title: 'Villa', error: error});
   }
 });
 
 
 // test function to test the error function
-router.get("/cause-error", (req, res, next) => {
+router.get("/cause-error", () => {
   throw new Error("This is a test error!");
 
 });
 
 // 404
-router.use((req, res, next) => {
+router.use((res) => {
   res.status(404).send("Síða fannst ekki (404)");
 });
 
 // 500
-router.use((err, req, res, next) => {
+router.use((err,res) => {
   const error = err.message || err;
   res.status(500).render("error", { title: "Villa", error: error });
 });
